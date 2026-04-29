@@ -16,7 +16,7 @@ export default function VizPage() {
         title="VizKPI"
         description="KPI tile with a primary stat, label, and trend indicator — for single-number answers ('What's our headcount?')."
         previewContext={{
-          userMsg: "What's our current headcount?",
+          userMsg: "What's our voluntary turnover rate this year?",
           aiLead: "",
         }}
       >
@@ -27,7 +27,7 @@ export default function VizPage() {
         title="VizBar"
         description="Small bar chart with axis labels for comparing a handful of categories at a glance."
         previewContext={{
-          userMsg: "Compare hires per department this year.",
+          userMsg: "What's our headcount by department?",
           aiLead: "Engineering is leading by a wide margin:",
         }}
       >
@@ -38,8 +38,8 @@ export default function VizPage() {
         title="VizLine"
         description="Line/trend chart over time for showing change against a period the user asked about."
         previewContext={{
-          userMsg: "How has turnover trended over the last 12 months?",
-          aiLead: "Steady decline since April:",
+          userMsg: "How has voluntary turnover trended over the last 12 months?",
+          aiLead: "Steady decline since spring:",
         }}
       >
         <VizLine />
@@ -49,8 +49,8 @@ export default function VizPage() {
         title="VizDonut"
         description="Donut chart with a percentage callout for part-to-whole answers ('What percent of staff is remote?')."
         previewContext={{
-          userMsg: "What share of the company is remote-first?",
-          aiLead: "",
+          userMsg: "How are our salaries lining up against market range?",
+          aiLead: "Compared to the Radford 2026 H2 benchmark:",
         }}
       >
         <VizDonut />
@@ -60,8 +60,8 @@ export default function VizPage() {
         title="VizTable"
         description="Compact table summarizing a small result set when rows-and-columns is the most honest answer shape."
         previewContext={{
-          userMsg: "Show me the top five paid roles in Engineering.",
-          aiLead: "Sorted by total compensation:",
+          userMsg: "Who were the top performers in Engineering Q3?",
+          aiLead: "Based on the calibrated manager ratings:",
         }}
       >
         <VizTable />

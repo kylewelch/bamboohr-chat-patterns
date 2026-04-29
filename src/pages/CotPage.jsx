@@ -16,8 +16,8 @@ export default function CotPage() {
         title="CoTStreaming"
         description="Reveals reasoning steps live as the model produces them — use to make latency feel like progress on tasks that take more than a beat or two."
         previewContext={{
-          userMsg: "Find me three internal candidates for the Director of Finance opening.",
-          aiLead: "Looking through the org now…",
+          userMsg: "How much PTO does Maria have left this year?",
+          aiLead: "Looking that up now…",
         }}
       >
         <CoTStreaming />
@@ -27,9 +27,9 @@ export default function CotPage() {
         title="CoTCompact"
         description="A collapsed 'Thought for Ns' pill that expands on click — use when the answer matters more than the work, but you still want to disclose it."
         previewContext={{
-          userMsg: "Who's eligible for the Q4 retention bonus?",
+          userMsg: "What's my PTO balance?",
           aiLead: "",
-          aiTrail: "12 employees qualify based on tenure, performance rating, and Q3 attendance.",
+          aiTrail: "You have 12.5 days remaining for 2026. Next accrual posts Dec 1.",
         }}
       >
         <CoTCompact />
@@ -39,7 +39,7 @@ export default function CotPage() {
         title="CoTStepList"
         description="A numbered step list shown post-hoc inside a collapsible card — use when the steps themselves are the value (audits, debugging, plans)."
         previewContext={{
-          userMsg: "Walk me through how you calculated the 18% turnover number.",
+          userMsg: "How did you find the 3 managers still pending Q3 reviews?",
           aiLead: "Here's the exact path I took:",
         }}
       >

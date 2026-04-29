@@ -41,6 +41,7 @@ export default function AskWindowShell({
   aiLead = "Here you go:",
   aiTrail,
   thread,
+  slotScrollX = false,
   dateLabel = "Today",
   width = 400,
   height = 720,
@@ -108,9 +109,22 @@ export default function AskWindowShell({
             {userMsg && <UserBubble>{userMsg}</UserBubble>}
             {aiLead && <AIBubble>{aiLead}</AIBubble>}
             {slot && (
-              <div style={{ alignSelf: 'stretch' }}>
-                {slot}
-              </div>
+              slotScrollX ? (
+                <div style={{
+                  alignSelf: 'stretch',
+                  overflowX: 'auto',
+                  margin: '0 -14px',
+                  padding: '0 14px',
+                }}>
+                  <div style={{ width: 'max-content' }}>
+                    {slot}
+                  </div>
+                </div>
+              ) : (
+                <div style={{ alignSelf: 'stretch' }}>
+                  {slot}
+                </div>
+              )
             )}
             {aiTrail && <AIBubble>{aiTrail}</AIBubble>}
           </>

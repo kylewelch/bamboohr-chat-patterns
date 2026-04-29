@@ -33,8 +33,8 @@ export default function MiscPage() {
         title="SourcesRow"
         description="A row of citation pills below an answer that names what the AI drew on, so users can verify or click through."
         previewContext={{
-          userMsg: "What's our policy on bereavement leave?",
-          aiLead: "Up to 5 paid days for an immediate family member, plus an additional 5 unpaid if needed. Drawn from:",
+          userMsg: "How much PTO does Maria have left this year?",
+          aiLead: "She has 12.5 days remaining. Drawn from:",
         }}
       >
         <SourcesRow />
@@ -44,8 +44,8 @@ export default function MiscPage() {
         title="SourcesInline"
         description="Numbered superscript citations woven into body text — for dense answers where source attribution belongs at the claim level."
         previewContext={{
-          userMsg: "Summarize how compensation reviews are run.",
-          aiLead: "Here's the short version, with sources marked at each claim:",
+          userMsg: "How much PTO does Maria have left, and when does she next accrue?",
+          aiLead: "",
         }}
       >
         <SourcesInline />
@@ -77,7 +77,7 @@ export default function MiscPage() {
         title="LoadStatus"
         description="Spinner with a 'Searching X of Y' counter — use when you can show concrete progress against a known total."
         previewContext={{
-          userMsg: "Search every employee record for missing I-9 forms.",
+          userMsg: "Find every employee record missing an I-9 form.",
           aiLead: "",
         }}
       >
@@ -99,8 +99,8 @@ export default function MiscPage() {
         title="LoadProgress"
         description="Progress bar with a percentage counter — for long, deterministic operations like exports or batch jobs."
         previewContext={{
-          userMsg: "Export every payroll run for fiscal year 2025.",
-          aiLead: "Pulling the data — this'll take a moment:",
+          userMsg: "Generate Q4 comp review packets for the team.",
+          aiLead: "On it — this'll take a moment:",
         }}
       >
         <LoadProgress />
@@ -110,10 +110,7 @@ export default function MiscPage() {
         title="FilterScope"
         description="A composer with a persistent scope-pill row above the input, so the same scope sticks across multiple sends."
         bare
-        previewContext={{
-          userMsg: "I'm digging into Engineering metrics this morning — keep that scope locked.",
-          aiLead: "Pinned the scope. Every question below will stay inside it:",
-        }}
+        previewContext={{ userMsg: "", aiLead: "" }}
       >
         <FilterScope />
       </PatternShowcase>
@@ -123,8 +120,8 @@ export default function MiscPage() {
         description="Search input + role toggle above a result list, for narrowing what the AI returned without a new chat turn."
         bare
         previewContext={{
-          userMsg: "Show me everyone in Sales.",
-          aiLead: "84 people. Use the bar above to narrow by name or role:",
+          userMsg: "Find me the senior engineers we hired this year.",
+          aiLead: "5 matches. Use the bar above to narrow further:",
         }}
       >
         <FilterRefine />
@@ -148,10 +145,7 @@ export default function MiscPage() {
         title="ContextComposer"
         description="Textarea with a row of attached context pills above it and a + Add button that opens a picker — the standard composer for context-heavy tasks."
         bare
-        previewContext={{
-          userMsg: "I want to ask about a couple of specific docs together.",
-          aiLead: "Attach what I should read first, then ask away:",
-        }}
+        previewContext={{ userMsg: "", aiLead: "" }}
       >
         <ContextComposer />
       </PatternShowcase>
@@ -160,10 +154,7 @@ export default function MiscPage() {
         title="ContextComposerReadOnly"
         description="Read-only variant of ContextComposer for showing what context was attached to a past message, with pills and Add disabled."
         bare
-        previewContext={{
-          userMsg: "Remind me what context I gave you yesterday on the Q3 plan.",
-          aiLead: "Here's the message you sent, with the context locked in:",
-        }}
+        previewContext={{ userMsg: "", aiLead: "" }}
       >
         <ContextComposerReadOnly />
       </PatternShowcase>
@@ -171,10 +162,7 @@ export default function MiscPage() {
       <PatternShowcase
         title="ContextOnMessage"
         description="Renders the context pills inline on a past user message, so the conversation log shows what the AI was given."
-        previewContext={{
-          userMsg: "",
-          aiLead: "Earlier in this thread, you asked:",
-        }}
+        previewContext={{ userMsg: "", aiLead: "" }}
       >
         <ContextOnMessage />
       </PatternShowcase>
@@ -183,10 +171,7 @@ export default function MiscPage() {
         title="FileUploadComposer"
         description="Composer with file thumbnails stacked above the input — for the moment between picking files and sending them."
         bare
-        previewContext={{
-          userMsg: "I have a few resumes I want you to skim.",
-          aiLead: "Drop them in and add any instructions before you send:",
-        }}
+        previewContext={{ userMsg: "", aiLead: "" }}
       >
         <FileUploadComposer />
       </PatternShowcase>
@@ -195,10 +180,7 @@ export default function MiscPage() {
         title="FileUploadSubmitted"
         description="A sent user message with file tiles plus the AI's first acknowledgement — closes the loop on a successful upload."
         bare
-        previewContext={{
-          userMsg: "",
-          aiLead: "",
-        }}
+        previewContext={{ userMsg: "", aiLead: "" }}
       >
         <FileUploadSubmitted />
       </PatternShowcase>
@@ -208,7 +190,7 @@ export default function MiscPage() {
         description="Dashed-border drop target for empty-state file pickers when the surface is dedicated to upload."
         bare
         previewContext={{
-          userMsg: "Take a look at this batch of offer letters.",
+          userMsg: "I have a batch of offer letters to look at.",
           aiLead: "Drop the files here and I'll start parsing:",
         }}
       >

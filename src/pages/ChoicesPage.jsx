@@ -36,8 +36,8 @@ export default function ChoicesPage() {
         title="MultipleChoiceChips"
         description="Pill-button toggles for picking several short, tag-like options at once."
         previewContext={{
-          userMsg: "Filter the candidate pool to the ones I care about.",
-          aiLead: "Tap any that apply — I'll narrow the pool as you pick:",
+          userMsg: "Build me a People report for the leadership readout.",
+          aiLead: "Happy to. Which topics should it cover?",
         }}
       >
         <MultipleChoiceChips />
@@ -47,8 +47,8 @@ export default function ChoicesPage() {
         title="SingleChoice"
         description="Radio list with optional hint text per row, for picking exactly one option from a small set."
         previewContext={{
-          userMsg: "How should I handle Priya's PTO request that overlaps the release week?",
-          aiLead: "A few clean options — pick one and I'll take it from there:",
+          userMsg: "Run me an attrition report.",
+          aiLead: "Pulling that now — what time frame?",
         }}
       >
         <SingleChoice />
@@ -58,9 +58,8 @@ export default function ChoicesPage() {
         title="SingleChoiceSegmented"
         description="Segmented control for picking one of a few mutually exclusive options inline (Weekly / Monthly / Quarterly)."
         previewContext={{
-          userMsg: "Show me turnover for Sales.",
-          aiLead: "Sure — at what cadence?",
-          aiTrail: "Tap one and I'll pull the chart.",
+          userMsg: "Set up a recurring headcount report for the leadership team.",
+          aiLead: "Sure — how often should I send this?",
         }}
       >
         <SingleChoiceSegmented />
@@ -70,7 +69,7 @@ export default function ChoicesPage() {
         title="TodoList"
         description="Live-updating checklist that ticks items off as work happens, so the user can watch progress at a glance."
         previewContext={{
-          userMsg: "Onboard our new hire Jordan starting Monday.",
+          userMsg: "Post the Senior Backend Engineer req and kick off sourcing.",
           aiLead: "On it — here's the plan I'm working through:",
           aiTrail: "I'll tick items off as each one finishes.",
         }}
@@ -82,8 +81,8 @@ export default function ChoicesPage() {
         title="DoneConfirm"
         description="Success card that closes the loop with a checkmark, headline, and a small summary of what was done."
         previewContext={{
-          userMsg: "Send the offer letter to Priya.",
-          aiLead: "Done — sealed and sent:",
+          userMsg: "Submit a time-off request for next Friday.",
+          aiLead: "Done — Dana will get an email shortly:",
         }}
       >
         <DoneConfirm />
@@ -93,7 +92,7 @@ export default function ChoicesPage() {
         title="DoneConfirmMinimal"
         description="A single-line success acknowledgement for trivial actions where a full card would be overkill."
         previewContext={{
-          userMsg: "Mark Sam's review as complete.",
+          userMsg: "Pull Jamie out of this month's bonus run and cut him a paper check instead.",
           aiLead: "",
         }}
       >
@@ -104,8 +103,8 @@ export default function ChoicesPage() {
         title="DoneConfirmDetail"
         description="Expanded success card with a metadata grid — use when the user needs to verify details (dates, counts, recipients) before moving on."
         previewContext={{
-          userMsg: "Schedule the onboarding kickoff for Jordan.",
-          aiLead: "Booked. Double-check the details before I notify everyone:",
+          userMsg: "Send the offer to Priya for the Senior Backend role.",
+          aiLead: "Sent. Double-check the details before I notify the team:",
         }}
       >
         <DoneConfirmDetail />

@@ -265,10 +265,11 @@ body {
 @media (min-width: 1280px) {
   .docs-main {
     max-width: 880px;
+    margin-right: 500px;
   }
 }
 
-/* ---- Preview pane (sticky right column) ---- */
+/* ---- Preview pane (pinned to viewport edge) ---- */
 .docs-preview {
   display: none;
 }
@@ -276,16 +277,16 @@ body {
 @media (min-width: 1280px) {
   .docs-preview {
     display: block;
-    flex-shrink: 0;
     width: 500px;
-    position: sticky;
+    position: fixed;
     top: 0;
-    align-self: flex-start;
+    right: 0;
     height: 100vh;
     border-left: 1px solid var(--gray-2, #f0f0f0);
     background: #ECEEEF;
     padding: 24px 24px;
     overflow: hidden;
+    z-index: 10;
   }
 }
 

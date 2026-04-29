@@ -24,8 +24,8 @@ export default function SystemObjectsPage() {
         title="SOEmployee"
         description="Employee reference card with a monogram, name, and role; the canonical way for the AI to name a specific person."
         previewContext={{
-          userMsg: "Who owns the candidate review for the Backend role?",
-          aiLead: "That's:",
+          userMsg: "Pull up Maria Jones.",
+          aiLead: "",
         }}
       >
         <SOEmployee />
@@ -35,8 +35,8 @@ export default function SystemObjectsPage() {
         title="SOReport"
         description="Saved-report reference card with chart icon, report name, and one supporting detail (last run, owner)."
         previewContext={{
-          userMsg: "Pull up the headcount report I ran last week.",
-          aiLead: "Found it:",
+          userMsg: "Pull up the turnover-by-department report.",
+          aiLead: "",
         }}
       >
         <SOReport />
@@ -46,8 +46,8 @@ export default function SystemObjectsPage() {
         title="SOJobOpening"
         description="Job opening reference card showing the role and a single supporting line (department or location)."
         previewContext={{
-          userMsg: "What's the most-applied-to opening right now?",
-          aiLead: "By a wide margin:",
+          userMsg: "What openings are still in active sourcing?",
+          aiLead: "Top one right now:",
         }}
       >
         <SOJobOpening />
@@ -68,7 +68,7 @@ export default function SystemObjectsPage() {
         title="SOTraining"
         description="Training assignment reference card for course or required-training references."
         previewContext={{
-          userMsg: "What does Jordan still need to complete before Day 30?",
+          userMsg: "What trainings does Maria still need to complete this year?",
           aiLead: "One outstanding item:",
         }}
       >
@@ -79,8 +79,8 @@ export default function SystemObjectsPage() {
         title="SOBenefitPlan"
         description="Benefit plan reference card for health, retirement, or other plan references in conversation."
         previewContext={{
-          userMsg: "Which health plan are most engineers on?",
-          aiLead: "67% of Engineering is enrolled in:",
+          userMsg: "What medical plan is Maria currently on?",
+          aiLead: "She's enrolled in:",
         }}
       >
         <SOBenefitPlan />
@@ -90,8 +90,8 @@ export default function SystemObjectsPage() {
         title="SOInlineRef"
         description="A small inline chip mentioning a system object woven into running prose, when a full card would interrupt the sentence."
         previewContext={{
-          userMsg: "Who managed the last comp review cycle?",
-          aiLead: "",
+          userMsg: "Who's our People Partner for the Design team?",
+          aiLead: "That'd be:",
         }}
       >
         <SOInlineRef />

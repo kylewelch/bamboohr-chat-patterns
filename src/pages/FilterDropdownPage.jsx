@@ -8,6 +8,9 @@ import { faFilter } from '@fortawesome/free-solid-svg-icons';
 import PatternShowcase from '../components/PatternShowcase.jsx';
 import PageHeader from '../components/PageHeader.jsx';
 
+// These four patterns each render their own user/AI messages inside the
+// component, so we set userMsg and aiLead to empty strings on the previewContext
+// to keep the AskWindowShell from layering a duplicate exchange on top.
 export default function FilterDropdownPage() {
   return (
     <>
@@ -21,10 +24,7 @@ export default function FilterDropdownPage() {
         title="FilterDropdownFirst"
         description="The AI's first message is itself a required scope picker — use when the answer is meaningless without a key dimension (country, period, team)."
         bare
-        previewContext={{
-          userMsg: "Show me PTO usage.",
-          aiLead: "PTO usage swings a lot by region — pick one and I'll pull the numbers:",
-        }}
+        previewContext={{ userMsg: "", aiLead: "" }}
       >
         <FilterDropdownFirst />
       </PatternShowcase>
@@ -32,10 +32,7 @@ export default function FilterDropdownPage() {
       <PatternShowcase
         title="FilterFacetsOnResult"
         description="A facet bar attached to the result message that refines the same answer in place, without a new chat turn."
-        previewContext={{
-          userMsg: "Who's up for review this quarter?",
-          aiLead: "37 employees. Use the facets to slice it:",
-        }}
+        previewContext={{ userMsg: "", aiLead: "" }}
       >
         <FilterFacetsOnResult />
       </PatternShowcase>
@@ -43,10 +40,7 @@ export default function FilterDropdownPage() {
       <PatternShowcase
         title="FilterSegmentedAnswer"
         description="View-switcher tabs inside a single AI reply (Summary / By Team / By Month) so the user can pivot the same data without re-asking."
-        previewContext={{
-          userMsg: "How are we tracking on hiring this year?",
-          aiLead: "27 of 34 planned hires made. Switch views to slice the same data:",
-        }}
+        previewContext={{ userMsg: "", aiLead: "" }}
       >
         <FilterSegmentedAnswer />
       </PatternShowcase>
@@ -55,10 +49,7 @@ export default function FilterDropdownPage() {
         title="FilterSlotFill"
         description="Conversational slot-filling where the AI asks for one missing dimension at a time using chip-pickers — for ambiguous requests with multiple required parameters."
         bare
-        previewContext={{
-          userMsg: "Run a comp report.",
-          aiLead: "Happy to. Two quick things first — which team, and over what window?",
-        }}
+        previewContext={{ userMsg: "", aiLead: "" }}
       >
         <FilterSlotFill />
       </PatternShowcase>

@@ -22,7 +22,7 @@ export default function ArtifactsPage() {
         title="ArtifactMarkdown"
         description="Preview card for a generated markdown document, with a fade-out gradient hinting at more content below."
         previewContext={{
-          userMsg: "Draft a remote-work policy for the company handbook.",
+          userMsg: "Draft a Q4 2026 headcount plan I can share with leadership.",
           aiLead: "Here's a first pass — open it to read the full thing:",
         }}
       >
@@ -44,8 +44,8 @@ export default function ArtifactsPage() {
         title="ArtifactCSV"
         description="Preview card for tabular data the AI produced or extracted, with a small table showing the first few rows."
         previewContext={{
-          userMsg: "Export every employee with a review due in Q4.",
-          aiLead: "Pulled 142 rows. First few shown — open to see all:",
+          userMsg: "Export current headcount and attrition by department as a CSV.",
+          aiLead: "Pulled 28 rows. First few shown — open to see the full file:",
         }}
       >
         <ArtifactCSV />
@@ -55,8 +55,8 @@ export default function ArtifactsPage() {
         title="ArtifactCode"
         description="Preview card for generated code, shown as a dark block with a syntax-highlight feel."
         previewContext={{
-          userMsg: "Write me a webhook handler that pings Slack when someone is hired.",
-          aiLead: "Here's a working snippet — open it to copy or edit:",
+          userMsg: "Generate the PTO accrual function we use for US salaried employees.",
+          aiLead: "Here it is — open to copy or edit:",
         }}
       >
         <ArtifactCode />
@@ -66,7 +66,7 @@ export default function ArtifactsPage() {
         title="ArtifactHTML"
         description="Preview card for an HTML artifact that's meant to be rendered (a mini page, an email template, etc.)."
         previewContext={{
-          userMsg: "Build a welcome email template for new hires.",
+          userMsg: "Build a 2027 benefits summary page employees can read during open enrollment.",
           aiLead: "Drafted — open to see the rendered version:",
         }}
       >

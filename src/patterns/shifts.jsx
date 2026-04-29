@@ -203,10 +203,6 @@ function ShiftWeekDraft() {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-      <div style={{ fontSize: 14, color: 'var(--gray-9)', lineHeight: 1.5 }}>
-        Here's a draft for the week of <b>Nov 25 – Dec 1</b>. Based on last week's pattern, availability, and your 2-lead target per shift.
-      </div>
-
       <div className="ai-card" style={{ padding: 0 }}>
         {/* Day header */}
         <div style={{

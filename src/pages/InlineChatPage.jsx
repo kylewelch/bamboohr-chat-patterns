@@ -22,8 +22,8 @@ export default function InlineChatPage() {
         description="A Figma-style pin on a highlighted span opens a small composer with a context chip and suggestions — quietest way to ask about a specific phrase."
         bare
         previewContext={{
-          userMsg: "Why is the variable-pay assumption so high in this comp model?",
-          aiLead: "Pin a question right on the spreadsheet and I'll answer in context:",
+          userMsg: "How did Q3 turnover land in Engineering?",
+          aiLead: "Pin a question on any phrase in the answer and I'll respond in context:",
         }}
       >
         <InlineComposerPin />
@@ -34,8 +34,8 @@ export default function InlineChatPage() {
         description="Selecting any text floats a dark action bar with Ask AI / Explain / Copy — for ad-hoc selections that don't have a permanent anchor."
         bare
         previewContext={{
-          userMsg: "I'm reading the new parental leave policy and something doesn't add up.",
-          aiLead: "Highlight the part you want me to explain:",
+          userMsg: "Give me the Q3 hiring summary.",
+          aiLead: "Highlight any phrase below to ask about it:",
         }}
       >
         <InlineSelectionMenu />
@@ -46,8 +46,8 @@ export default function InlineChatPage() {
         description="Hovering a row or card surfaces an action row (Ask, Explain, Drill in) — use on structured outputs (rows, cells, list items)."
         bare
         previewContext={{
-          userMsg: "Why did Sales turnover spike in October?",
-          aiLead: "Hover any row to ask, explain, or drill in:",
+          userMsg: "Show me headcount by department.",
+          aiLead: "Hover any row to ask about it, explain it, or drill in:",
         }}
       >
         <InlineElementHover />
