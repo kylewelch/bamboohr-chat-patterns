@@ -4,7 +4,6 @@ import {
   SingleChoice,
   SingleChoiceSegmented,
   TodoList,
-  TodoListInAskWindow,
   DoneConfirm,
   DoneConfirmMinimal,
   DoneConfirmDetail,
@@ -77,10 +76,6 @@ export default function ChoicesPage() {
         }}
       >
         <TodoList />
-      </PatternShowcase>
-
-      <PatternShowcase title="TodoListInAskWindow" description="Full chat surface with a pinned todo header — use when the work itself is multi-step and the todo is the artifact." bare>
-        <TodoListInAskWindow />
       </PatternShowcase>
 
       <PatternShowcase

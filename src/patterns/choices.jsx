@@ -1,7 +1,6 @@
 // Choice selectors — single and multiple; to-do list; done confirmation
 import React from 'react';
 import { Ico } from './primitives';
-import AskWindowShell, { UserBubble, AIBubble } from '../components/AskWindowShell.jsx';
 
 function MultipleChoice() {
   const opts = [
@@ -403,62 +402,4 @@ function DoneConfirmDetail() {
   );
 }
 
-// ---------- To-do list pinned in an Ask window ----------
-// Reuses <TodoList /> so the pinned strip in the chat panel is the same
-// component as the standalone artboard. AskWindowShell wraps it.
-function TodoListInAskWindow() {
-  const thumbsRow = (
-    <div style={{ display: 'flex', gap: 10, marginTop: 10 }}>
-      <button style={{ background: 'transparent', border: 0, padding: 2, cursor: 'pointer', color: 'var(--gray-5)' }}>
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><path d="M7 22V11m0 0l4-8a2 2 0 0 1 3.7 1L13 10h5a2 2 0 0 1 2 2l-1.5 7a2 2 0 0 1-2 1.5H7z"/></svg>
-      </button>
-      <button style={{ background: 'transparent', border: 0, padding: 2, cursor: 'pointer', color: 'var(--gray-5)' }}>
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><path d="M17 2v11m0 0l-4 8a2 2 0 0 1-3.7-1L11 14H6a2 2 0 0 1-2-2l1.5-7A2 2 0 0 1 7.5 3.5H17z"/></svg>
-      </button>
-    </div>
-  );
-
-  const thread = (
-    <>
-      <UserBubble>Post the senior backend req and kick off sourcing.</UserBubble>
-      <AIBubble>
-        On it — I'll keep the checklist above updated as I go. I've already posted to the careers page and cross-listed on LinkedIn and Indeed.
-        {thumbsRow}
-      </AIBubble>
-      <UserBubble>While you're at it — what's the comp band for this role?</UserBubble>
-      <AIBubble>
-        The 2026 band for Senior Backend is <b>$165k–$195k</b> base, plus standard equity. Most recent hires landed around $178k.
-      </AIBubble>
-      <UserBubble>Include the range in the posting. And loop in Priya as a second interviewer.</UserBubble>
-      <div style={{ fontSize: 13, color: 'var(--gray-7)', display: 'flex', alignItems: 'center', gap: 8 }}>
-        <Dots />
-        <span>Updating the posting and adding Priya to the loop…</span>
-      </div>
-    </>
-  );
-
-  return (
-    <AskWindowShell
-      pinned={<TodoList variant="muted" />}
-      dateLabel="Tuesday, Nov 21"
-      thread={thread}
-    />
-  );
-}
-
-// Lightweight dots for thinking state used in ask window
-function Dots() {
-  return (
-    <span style={{ display: 'inline-flex', gap: 3 }}>
-      {[0,1,2].map(i => (
-        <span key={i} style={{
-          width: 5, height: 5, borderRadius: '50%', background: 'var(--gray-5)',
-          animation: `dotpulse 1.2s ${i * 0.15}s infinite ease-in-out`
-        }} />
-      ))}
-      <style>{`@keyframes dotpulse { 0%,60%,100%{opacity:.3} 30%{opacity:1} }`}</style>
-    </span>
-  );
-}
-
-export { MultipleChoice, MultipleChoiceChips, SingleChoice, SingleChoiceSegmented, TodoList, TodoListInAskWindow, DoneConfirm, DoneConfirmMinimal, DoneConfirmDetail };
+export { MultipleChoice, MultipleChoiceChips, SingleChoice, SingleChoiceSegmented, TodoList, DoneConfirm, DoneConfirmMinimal, DoneConfirmDetail };
