@@ -8,7 +8,7 @@
 //   • a row of prompt chips that prefill common country-scoped questions
 // Selection becomes a context pill on the user's next reply.
 import React from 'react';
-import { Ico, Monogram } from './primitives';
+import { Ico } from './primitives';
 
 function FilterDropdownFirst() {
   const [open, setOpen] = React.useState(true);
@@ -221,127 +221,9 @@ function FDChip({ children }) {
 
 export {
   FilterDropdownFirst,
-  FilterFacetsOnResult,
   FilterSegmentedAnswer,
   FilterSlotFill,
 };
-
-// ============================================================================
-// 2 · Facets on a result message
-// ----------------------------------------------------------------------------
-// After the AI returns a list/table, the reply carries its own facet bar.
-// Clicking a facet narrows the existing result in-place — no new user
-// message, no round-trip. Acts like search-results faceted filtering, but
-// the facet bar is attached to the specific AI message it refines.
-// ============================================================================
-function FilterFacetsOnResult() {
-  const all = [
-    { n: 'Priya Nair',    d: 'Eng · Backend',   ti: 'Senior SWE', loc: 'US',  st: 'Active' },
-    { n: 'Jonah Keller',  d: 'Eng · Platform',  ti: 'Staff SWE',  loc: 'US',  st: 'Active' },
-    { n: 'Sam Chen',      d: 'Eng · Frontend',  ti: 'SWE II',     loc: 'US',  st: 'Active' },
-    { n: 'Aiko Tanaka',   d: 'Eng · SRE',       ti: 'Senior SWE', loc: 'JP',  st: 'Active' },
-    { n: 'Marc Silva',    d: 'Design',          ti: 'Senior PD',  loc: 'BR',  st: 'On leave' },
-    { n: 'Luca Rossi',    d: 'Eng · Backend',   ti: 'SWE II',     loc: 'IT',  st: 'Active' },
-    { n: 'Hana Park',     d: 'Eng · Platform',  ti: 'Senior SWE', loc: 'US',  st: 'Active' },
-  ];
-  const [facets, setFacets] = React.useState({ dept: 'Eng', level: null, loc: null, status: 'Active' });
-  const set = (k, v) => setFacets(f => ({ ...f, [k]: f[k] === v ? null : v }));
-  const rows = all.filter(r =>
-    (!facets.dept   || r.d.startsWith(facets.dept)) &&
-    (!facets.level  || r.ti.startsWith(facets.level)) &&
-    (!facets.loc    || r.loc === facets.loc) &&
-    (!facets.status || r.st === facets.status)
-  );
-  const active = Object.entries(facets).filter(([, v]) => v);
-
-  return (
-    <div>
-      <div className="msg msg-user" style={{ marginBottom: 14 }}>
-        <div className="msg-body">Show me senior engineers we hired this year.</div>
-      </div>
-      <div className="msg msg-ai">
-        <div className="msg-body" style={{ width: '100%' }}>
-          <div style={{ fontSize: 14, color: 'var(--gray-9)', marginBottom: 10 }}>
-            Found <b>{all.length}</b> people. Narrow by any facet below to refine.
-          </div>
-
-          {/* Facet bar — attached to THIS reply, not the composer.
-              Toggling does not send a new message; it filters this reply in place. */}
-          <div style={{
-            background: 'var(--gray-1)', border: '1px solid var(--gray-2)',
-            borderRadius: 8, padding: '8px 10px', marginBottom: 10,
-          }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap' }}>
-              <FacetGroup label="Dept" options={['Eng', 'Design']} value={facets.dept} onPick={v => set('dept', v)} />
-              <Sep />
-              <FacetGroup label="Level" options={['Staff', 'Senior', 'SWE II']} value={facets.level} onPick={v => set('level', v)} />
-              <Sep />
-              <FacetGroup label="Location" options={['US', 'JP', 'IT', 'BR']} value={facets.loc} onPick={v => set('loc', v)} />
-              <Sep />
-              <FacetGroup label="Status" options={['Active', 'On leave']} value={facets.status} onPick={v => set('status', v)} />
-              {active.length > 0 && (
-                <button onClick={() => setFacets({ dept: null, level: null, loc: null, status: null })}
-                  style={{
-                    marginLeft: 'auto', background: 'transparent', border: 0,
-                    fontSize: 11, color: 'var(--gray-6)', cursor: 'pointer', fontFamily: 'inherit',
-                  }}>Clear all</button>
-              )}
-            </div>
-          </div>
-
-          {/* Result count + live-narrow indicator */}
-          <div style={{ fontSize: 12, color: 'var(--gray-6)', marginBottom: 6, display: 'flex', alignItems: 'center', gap: 6 }}>
-            Showing <b style={{ color: 'var(--gray-9)' }}>{rows.length}</b> of {all.length}
-            {active.length > 0 && <span> · filtered by {active.map(([k]) => k).join(' + ')}</span>}
-          </div>
-
-          {/* Result table */}
-          <div style={{ border: '1px solid var(--gray-2)', borderRadius: 8, overflow: 'hidden', background: '#fff' }}>
-            {rows.length === 0 ? (
-              <div style={{ padding: 20, textAlign: 'center', fontSize: 13, color: 'var(--gray-6)' }}>No matches — try clearing a facet.</div>
-            ) : rows.map((r, i) => (
-              <div key={r.n} style={{
-                display: 'flex', alignItems: 'center', gap: 12,
-                padding: '9px 12px',
-                borderBottom: i < rows.length - 1 ? '1px solid var(--gray-2)' : 'none',
-              }}>
-                <Monogram name={r.n} size={26} />
-                <div style={{ flex: 1, minWidth: 0 }}>
-                  <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--gray-9)' }}>{r.n}</div>
-                  <div style={{ fontSize: 12, color: 'var(--gray-6)' }}>{r.d} · {r.ti}</div>
-                </div>
-                <div style={{ fontSize: 11, color: 'var(--gray-7)', fontWeight: 500 }}>{r.loc}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function FacetGroup({ label, options, value, onPick }) {
-  return (
-    <div style={{ display: 'inline-flex', alignItems: 'center', gap: 4 }}>
-      <span style={{ fontSize: 11, fontWeight: 600, color: 'var(--gray-7)', textTransform: 'uppercase', letterSpacing: '.03em', marginRight: 2 }}>{label}</span>
-      {options.map(o => {
-        const on = value === o;
-        return (
-          <button key={o} onClick={() => onPick(o)} style={{
-            padding: '3px 9px', borderRadius: 1000,
-            background: on ? 'var(--gray-9)' : '#fff',
-            color: on ? '#fff' : 'var(--gray-8)',
-            border: `1px solid ${on ? 'var(--gray-9)' : 'var(--gray-3)'}`,
-            fontSize: 11, fontWeight: 500, cursor: 'pointer', fontFamily: 'inherit',
-          }}>{o}</button>
-        );
-      })}
-    </div>
-  );
-}
-function Sep() {
-  return <span style={{ width: 1, height: 16, background: 'var(--gray-3)', display: 'inline-block' }} />;
-}
 
 // ============================================================================
 // 3 · Segmented control on an answer
@@ -388,7 +270,7 @@ function FilterSegmentedAnswer() {
           {/* Swappable body — same message, different view */}
           {view === 'summary' && (
             <div className="ai-card" style={{ padding: '12px 14px' }}>
-              <div style={{ display: 'flex', gap: 24, alignItems: 'flex-end', flexWrap: 'wrap' }}>
+              <div style={{ display: 'flex', gap: 24, alignItems: 'flex-start', flexWrap: 'wrap' }}>
                 <Stat big="14" label="Offers accepted" />
                 <Stat big="29 d" label="Avg time-to-fill" sub="↓ 9d vs Q2" good />
                 <Stat big="86%" label="Close rate" />
@@ -423,7 +305,7 @@ function FilterSegmentedAnswer() {
 
           {view === 'byMonth' && (
             <div className="ai-card" style={{ padding: '14px 14px 10px' }}>
-              <div style={{ display: 'flex', alignItems: 'flex-end', gap: 14, height: 88, padding: '0 4px' }}>
+              <div style={{ display: 'flex', alignItems: 'flex-end', gap: 14, height: 120, padding: '0 4px' }}>
                 {[{ m: 'Jul', n: 3 }, { m: 'Aug', n: 5 }, { m: 'Sep', n: 6 }].map(b => (
                   <div key={b.m} style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4 }}>
                     <div style={{ fontSize: 11, fontWeight: 600, color: 'var(--gray-8)' }}>{b.n}</div>

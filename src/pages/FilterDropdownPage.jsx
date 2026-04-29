@@ -1,6 +1,5 @@
 import {
   FilterDropdownFirst,
-  FilterFacetsOnResult,
   FilterSegmentedAnswer,
   FilterSlotFill,
 } from '../patterns/filter-dropdown.jsx';
@@ -27,14 +26,6 @@ export default function FilterDropdownPage() {
         previewContext={{ userMsg: "", aiLead: "" }}
       >
         <FilterDropdownFirst />
-      </PatternShowcase>
-
-      <PatternShowcase
-        title="FilterFacetsOnResult"
-        description="A facet bar attached to the result message that refines the same answer in place, without a new chat turn."
-        previewContext={{ userMsg: "", aiLead: "" }}
-      >
-        <FilterFacetsOnResult />
       </PatternShowcase>
 
       <PatternShowcase
