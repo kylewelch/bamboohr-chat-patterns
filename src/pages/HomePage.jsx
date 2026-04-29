@@ -10,6 +10,7 @@ import {
   faBriefcase,
   faCalendarDays,
   faChartColumn,
+  faLayerGroup,
   faPuzzlePiece,
 } from '@fortawesome/free-solid-svg-icons';
 
@@ -23,17 +24,16 @@ const PAGES = [
   { to: '/system-objects',  icon: faBriefcase,         name: 'System Objects',   desc: 'Quiet, scannable references to employees, reports, jobs, policies.' },
   { to: '/shifts',          icon: faCalendarDays,      name: 'Shifts',           desc: 'Shift edit, fill open shifts, draft a week, publish & notify.' },
   { to: '/viz',             icon: faChartColumn,       name: 'Data Viz',         desc: 'KPI tiles, bar/line/donut charts, mini tables.' },
+  { to: '/embedded',        icon: faLayerGroup,        name: 'Embedded',         desc: 'Patterns that live outside chat — dashboard tiles, queues, global input bars.' },
   { to: '/skill',           icon: faPuzzlePiece,       name: 'Claude Code Skill',desc: 'Download a SKILL.md bundle so Claude Code knows these patterns by name.' },
 ];
 
 export default function HomePage() {
   return (
     <>
-      <h1>AI Chat Patterns</h1>
+      <h1>AI Patterns</h1>
       <p className="page-lede">
-        A working catalog of the AI/chat UI patterns used across BambooHR. Each
-        pattern lives on its own page with a live demo and brief notes on when
-        and why to use it.
+        A working catalog of the AI/chat UI patterns used across BambooHR.
       </p>
       <div className="home-grid">
         {PAGES.map(({ to, icon, name, desc }) => (

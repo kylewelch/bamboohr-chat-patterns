@@ -10,6 +10,7 @@ import MiscPage from './pages/MiscPage.jsx';
 import ShiftsPage from './pages/ShiftsPage.jsx';
 import SystemObjectsPage from './pages/SystemObjectsPage.jsx';
 import VizPage from './pages/VizPage.jsx';
+import EmbeddedPage from './pages/EmbeddedPage.jsx';
 import SkillPage from './pages/SkillPage.jsx';
 
 export default function App() {
@@ -26,6 +27,7 @@ export default function App() {
         <Route path="shifts" element={<ShiftsPage />} />
         <Route path="system-objects" element={<SystemObjectsPage />} />
         <Route path="viz" element={<VizPage />} />
+        <Route path="embedded" element={<EmbeddedPage />} />
         <Route path="skill" element={<SkillPage />} />
       </Route>
     </Routes>

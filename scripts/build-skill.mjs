@@ -28,6 +28,7 @@ const PAGE_CATEGORIES = {
   ShiftsPage: { title: 'Shifts', source: 'patterns/shifts.jsx' },
   SystemObjectsPage: { title: 'System Objects', source: 'patterns/system-objects.jsx' },
   VizPage: { title: 'Data Viz', source: 'patterns/viz.jsx' },
+  EmbeddedPage: { title: 'Embedded (outside the chat window)', source: 'patterns/embedded.jsx' },
 };
 
 // ---- Helpers ----

@@ -11,6 +11,7 @@ const NAV = [
   { to: '/system-objects', label: 'System Objects' },
   { to: '/shifts', label: 'Shifts' },
   { to: '/viz', label: 'Data Viz' },
+  { to: '/embedded', label: 'Embedded' },
   { to: '/skill', label: 'Claude Code Skill' },
 ];
 
@@ -18,8 +19,8 @@ export default function Sidebar() {
   return (
     <aside className="docs-sidebar">
       <div className="docs-sidebar-header">
-        <div className="docs-sidebar-title">AI Chat Patterns</div>
-        <div className="docs-sidebar-sub">BambooHR · Encore</div>
+        <div className="docs-sidebar-title">AI Patterns</div>
+        <div className="docs-sidebar-sub">BambooHR</div>
       </div>
       <nav className="docs-nav">
         {NAV.map(({ to, label, end }) => (

@@ -75,6 +75,7 @@ body {
 
 .docs-nav-link:hover {
   background: var(--gray-2, #f0f0f0);
+  text-decoration: none;
 }
 
 .docs-nav-link.is-active {
@@ -267,6 +268,14 @@ body {
     max-width: 880px;
     margin-right: 500px;
   }
+
+  /* Wide variant — used on routes where no preview pane is shown. Reclaims
+     the 500px reserved for the pane and widens the content column by ~200px
+     so embedded patterns don't get squeezed. */
+  .docs-main.docs-main--wide {
+    max-width: 1180px;
+    margin-right: 0;
+  }
 }
 
 /* ---- Preview pane (pinned to viewport edge) ---- */
@@ -431,7 +440,6 @@ body {
   font-size: 14px;
   color: var(--gray-7, #555);
   line-height: 1.5;
-  max-width: 68ch;
 }
 
 .showcase-stage {
@@ -450,7 +458,7 @@ body {
 /* ---- Home page tiles ---- */
 .home-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 12px;
   margin-top: 24px;
 }
@@ -470,6 +478,7 @@ body {
 .home-tile:hover {
   border-color: rgba(46, 121, 24, 0.4);
   transform: translateY(-1px);
+  text-decoration: none;
 }
 
 .home-tile-icon {
