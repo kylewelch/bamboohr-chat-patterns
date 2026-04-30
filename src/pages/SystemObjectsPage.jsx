@@ -91,10 +91,9 @@ export default function SystemObjectsPage() {
         description="A small inline chip mentioning a system object woven into running prose, when a full card would interrupt the sentence."
         previewContext={{
           userMsg: "Who's our People Partner for the Design team?",
-          aiLead: "That'd be:",
         }}
       >
-        <SOInlineRef />
+        <span>Your People Partners for the Design team are <SOInlineRef name="Maria Jones" /> and <SOInlineRef name="Jonah Keller" /> — reach out to either of them for support.</span>
       </PatternShowcase>
     </>
   );

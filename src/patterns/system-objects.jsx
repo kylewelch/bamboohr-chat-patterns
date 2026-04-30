@@ -2,6 +2,7 @@
 // Principle: one icon/avatar · one title · at most one supporting line.
 // No "TYPE · REQ-XXXX" eyebrow caps, no tag rows, no action bars.
 import React from 'react';
+import ReactDOM from 'react-dom';
 import { Ico, Monogram } from './primitives';
 
 function SOShell({ left, title, sub, trailing, maxWidth = 380 }) {
@@ -43,7 +44,7 @@ function SOEmployee() {
 function SOReport() {
   return (
     <SOShell
-      left={<SOIcon glyph={<Ico.chart style={{ width: 18, height: 18 }} />} color="var(--info-dark)" bg="var(--info-light)" />}
+      left={<SOIcon glyph={<Ico.chart style={{ width: 18, height: 18 }} />} color="var(--info-dark)" bg="var(--gray-1)" />}
       title="Turnover by department"
       sub="Report · refreshed weekly"
       trailing={<Ico.chevR style={{ color: 'var(--gray-5)' }} />}
@@ -54,10 +55,10 @@ function SOReport() {
 function SOJobOpening() {
   return (
     <SOShell
-      left={<SOIcon glyph={<Ico.briefcase style={{ width: 18, height: 18 }} />} color="var(--primary-500)" bg="var(--primary-100)" />}
+      left={<SOIcon glyph={<Ico.briefcase style={{ width: 18, height: 18 }} />} color="var(--primary-500)" bg="var(--gray-1)" />}
       title="Senior Backend Engineer"
       sub="48 applicants · open 12 days"
-      trailing={<span className="pill pill-info" style={{ fontSize: 11 }}>Sourcing</span>}
+      trailing={<span className="pill pill-info" style={{ fontSize: 12, fontWeight: 400, textTransform: 'none', letterSpacing: 'normal' }}>Sourcing</span>}
     />
   );
 }
@@ -77,7 +78,7 @@ function SOTraining() {
   // Progress is the key data point — keep it as the supporting line, not a bar.
   return (
     <SOShell
-      left={<SOIcon glyph={<Ico.grad style={{ width: 18, height: 18 }} />} color="var(--discovery-dark)" bg="var(--discovery-light)" />}
+      left={<SOIcon glyph={<Ico.grad style={{ width: 18, height: 18 }} />} color="var(--discovery-dark)" bg="var(--gray-1)" />}
       title="Preventing harassment at work"
       sub={<span>Training · <span style={{ color: 'var(--warning-dark)', fontWeight: 600 }}>Due Dec 31</span></span>}
       trailing={<Ico.chevR style={{ color: 'var(--gray-5)' }} />}
@@ -88,10 +89,10 @@ function SOTraining() {
 function SOBenefitPlan() {
   return (
     <SOShell
-      left={<SOIcon glyph={<Ico.heart style={{ width: 18, height: 18 }} />} color="var(--primary-500)" bg="var(--primary-100)" />}
+      left={<SOIcon glyph={<Ico.heart style={{ width: 18, height: 18 }} />} color="var(--primary-500)" bg="var(--gray-1)" />}
       title="Aetna PPO · Medical"
       sub="Senior Product Designer · Design"
-      trailing={<span className="pill pill-primary" style={{ fontSize: 11 }}>Enrolled</span>}
+      trailing={<span className="pill pill-primary" style={{ fontSize: 12, fontWeight: 400, textTransform: 'none', letterSpacing: 'normal' }}>Enrolled</span>}
     />
   );
 }
@@ -100,6 +101,7 @@ function SOBenefitPlan() {
 // employee card popover (headshot, title, status pills, location/email/phone).
 function SOInlineRef({ name = 'Maria Jones' }) {
   const [open, setOpen] = React.useState(false);
+  const [pos, setPos] = React.useState(null);
   const triggerRef = React.useRef(null);
 
   // Deterministic dummy data keyed by name so each pill shows consistent
@@ -117,7 +119,14 @@ function SOInlineRef({ name = 'Maria Jones' }) {
     <span style={{ position: 'relative', display: 'inline-block' }}>
       <span
         ref={triggerRef}
-        onClick={(e) => { e.stopPropagation(); setOpen(o => !o); }}
+        onClick={(e) => {
+          e.stopPropagation();
+          if (!open && triggerRef.current) {
+            const r = triggerRef.current.getBoundingClientRect();
+            setPos({ top: r.bottom + 6, centerX: r.left + r.width / 2 });
+          }
+          setOpen(o => !o);
+        }}
         style={{
           display: 'inline-flex', alignItems: 'center', gap: 6,
           padding: '2px 10px 2px 4px', borderRadius: 6,
@@ -128,12 +137,12 @@ function SOInlineRef({ name = 'Maria Jones' }) {
         <Monogram name={name} size={20} photo={true} radius={4} />
         {name}
       </span>
-      {open && <EmployeePopover name={name} data={p} onClose={() => setOpen(false)} />}
+      {open && pos && <EmployeePopover name={name} data={p} pos={pos} onClose={() => setOpen(false)} />}
     </span>
   );
 }
 
-function EmployeePopover({ name, data, onClose }) {
+function EmployeePopover({ name, data, pos, onClose }) {
   React.useEffect(() => {
     const onDoc = () => onClose();
     const onKey = (e) => { if (e.key === 'Escape') onClose(); };
@@ -154,7 +163,7 @@ function EmployeePopover({ name, data, onClose }) {
       <span style={{
         display: 'inline-flex', alignItems: 'center', gap: 6,
         padding: '4px 10px', borderRadius: 6,
-        background: s.bg, color: s.fg, fontSize: 12, fontWeight: 600,
+        background: s.bg, color: s.fg, fontSize: 12, fontWeight: 400,
       }}>
         <span style={{ display: 'inline-flex' }}>{s.icon}</span>{label}
       </span>
@@ -164,18 +173,19 @@ function EmployeePopover({ name, data, onClose }) {
     <span style={{
       display: 'inline-flex', alignItems: 'center', gap: 6,
       padding: '4px 10px', borderRadius: 6,
-      background: '#E5F0F9', color: '#1B5A8E', fontSize: 12, fontWeight: 600,
+      background: '#E5F0F9', color: '#1B5A8E', fontSize: 12, fontWeight: 400,
     }}>
       <Ico.calendar />{label}
     </span>
   );
 
-  return (
+  return ReactDOM.createPortal(
     <div
       onMouseDown={(e) => e.stopPropagation()}
       style={{
-        position: 'absolute', top: 'calc(100% + 6px)', left: 0,
-        width: 340, zIndex: 100,
+        position: 'fixed', top: pos.top, left: pos.centerX,
+        transform: 'translateX(-50%)',
+        width: 340, zIndex: 1000,
         background: '#fff', borderRadius: 14,
         border: '1px solid var(--gray-2)',
         boxShadow: '0 14px 36px rgba(0,0,0,.14), 0 2px 6px rgba(0,0,0,.06)',
@@ -208,7 +218,8 @@ function EmployeePopover({ name, data, onClose }) {
         <InfoRow icon={<Ico.mail />}>{data.email}</InfoRow>
         <InfoRow icon={<Ico.phone />}>{data.phone}</InfoRow>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }
 

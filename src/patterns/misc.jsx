@@ -627,7 +627,7 @@ function FileUploadComposer() {
           }}>
             <div style={{
               width: 30, height: 30, borderRadius: 6,
-              background: f.k === 'img' ? 'var(--discovery-light)' : f.k === 'csv' ? 'var(--success-light)' : '#fdeaec',
+              background: 'var(--gray-1)',
               color: f.k === 'img' ? 'var(--discovery-dark)' : f.k === 'csv' ? 'var(--success-dark)' : 'var(--error-dark)',
               display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0,
               fontSize: 9, fontWeight: 700, textTransform: 'uppercase'
@@ -672,7 +672,7 @@ function FileUploadSubmitted() {
     }}>
       <div style={{
         width: 28, height: 28, borderRadius: 6,
-        background: f.k === 'img' ? 'var(--discovery-light)' : f.k === 'csv' ? 'var(--success-light)' : '#fdeaec',
+        background: 'var(--gray-1)',
         color: f.k === 'img' ? 'var(--discovery-dark)' : f.k === 'csv' ? 'var(--success-dark)' : 'var(--error-dark)',
         display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0,
         fontSize: 9, fontWeight: 700, textTransform: 'uppercase'

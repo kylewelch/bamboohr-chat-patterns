@@ -31,7 +31,7 @@ function ArtifactMarkdown() {
   return (
     <ArtifactBase
       icon={<Ico.doc style={{ width: 20, height: 20 }} />}
-      color="#1B7AC2" bg="#EAF4FB"
+      color="#1B7AC2" bg="var(--gray-1)"
       type="Markdown"
       title="Q4 2026 Headcount Plan.md"
       meta="3.2 KB · just now"
@@ -65,7 +65,7 @@ function ArtifactImage() {
   return (
     <ArtifactBase
       icon={<Ico.image style={{ width: 20, height: 20 }} />}
-      color="#9853b9" bg="#f9edff"
+      color="#9853b9" bg="var(--gray-1)"
       type="Image"
       title="org-chart-engineering-nov-2026.png"
       meta="1240 × 780 · 186 KB"
@@ -107,7 +107,7 @@ function ArtifactCSV() {
   return (
     <ArtifactBase
       icon={<Ico.table style={{ width: 20, height: 20 }} />}
-      color="#2A8A3C" bg="#E8F5EA"
+      color="#2A8A3C" bg="var(--gray-1)"
       type="Spreadsheet"
       title="headcount-by-dept.csv"
       meta="5 columns · 28 rows"
@@ -140,7 +140,7 @@ function ArtifactCode() {
   return (
     <ArtifactBase
       icon={<Ico.code style={{ width: 18, height: 18 }} />}
-      color="#38312f" bg="#f5f4f1"
+      color="#38312f" bg="var(--gray-1)"
       type="Python"
       title="pto_accrual.py"
       meta="42 lines"
@@ -168,7 +168,7 @@ function ArtifactHTML() {
   return (
     <ArtifactBase
       icon={<Ico.globe style={{ width: 18, height: 18 }} />}
-      color="#cd4a00" bg="#fff1e5"
+      color="#cd4a00" bg="var(--gray-1)"
       type="HTML"
       title="benefits-summary-2027.html"
       meta="interactive · 12 sections"
