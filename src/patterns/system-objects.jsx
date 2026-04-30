@@ -44,7 +44,7 @@ function SOEmployee() {
 function SOReport() {
   return (
     <SOShell
-      left={<SOIcon glyph={<Ico.chart style={{ width: 18, height: 18 }} />} color="var(--info-dark)" bg="var(--info-light)" />}
+      left={<SOIcon glyph={<Ico.chart style={{ width: 18, height: 18 }} />} color="var(--info-dark)" bg="var(--gray-1)" />}
       title="Turnover by department"
       sub="Report · refreshed weekly"
       trailing={<Ico.chevR style={{ color: 'var(--gray-5)' }} />}
@@ -55,7 +55,7 @@ function SOReport() {
 function SOJobOpening() {
   return (
     <SOShell
-      left={<SOIcon glyph={<Ico.briefcase style={{ width: 18, height: 18 }} />} color="var(--primary-500)" bg="var(--primary-100)" />}
+      left={<SOIcon glyph={<Ico.briefcase style={{ width: 18, height: 18 }} />} color="var(--primary-500)" bg="var(--gray-1)" />}
       title="Senior Backend Engineer"
       sub="48 applicants · open 12 days"
       trailing={<span className="pill pill-info" style={{ fontSize: 12, fontWeight: 400, textTransform: 'none', letterSpacing: 'normal' }}>Sourcing</span>}
@@ -78,7 +78,7 @@ function SOTraining() {
   // Progress is the key data point — keep it as the supporting line, not a bar.
   return (
     <SOShell
-      left={<SOIcon glyph={<Ico.grad style={{ width: 18, height: 18 }} />} color="var(--discovery-dark)" bg="var(--discovery-light)" />}
+      left={<SOIcon glyph={<Ico.grad style={{ width: 18, height: 18 }} />} color="var(--discovery-dark)" bg="var(--gray-1)" />}
       title="Preventing harassment at work"
       sub={<span>Training · <span style={{ color: 'var(--warning-dark)', fontWeight: 600 }}>Due Dec 31</span></span>}
       trailing={<Ico.chevR style={{ color: 'var(--gray-5)' }} />}
@@ -89,7 +89,7 @@ function SOTraining() {
 function SOBenefitPlan() {
   return (
     <SOShell
-      left={<SOIcon glyph={<Ico.heart style={{ width: 18, height: 18 }} />} color="var(--primary-500)" bg="var(--primary-100)" />}
+      left={<SOIcon glyph={<Ico.heart style={{ width: 18, height: 18 }} />} color="var(--primary-500)" bg="var(--gray-1)" />}
       title="Aetna PPO · Medical"
       sub="Senior Product Designer · Design"
       trailing={<span className="pill pill-primary" style={{ fontSize: 12, fontWeight: 400, textTransform: 'none', letterSpacing: 'normal' }}>Enrolled</span>}
