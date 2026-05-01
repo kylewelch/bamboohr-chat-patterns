@@ -736,10 +736,204 @@ function FileUploadDropzone() {
   );
 }
 
+// ===== Load Form Live Fill =====
+// Gradient AI container that pulses while an agent live-fills a structured
+// form. Skeletons give way to a row-by-row wave reveal of AI-extracted
+// values; any fields the agent leaves blank stay highlighted so the user
+// knows what still needs their input.
+
+// Each row's fields. `isAi: true` means the agent extracted a value and it'll
+// appear during the wave reveal; `isAi: false` means the agent couldn't
+// extract it — it pops in immediately when live-fill ends and is highlighted.
+const TAX_FIELD_ROWS = [
+  [
+    { name: 'TaxTypeDesc',           label: 'Tax Description',          value: 'MN Paid Family & Medical Leave', isAi: true },
+    { name: 'GovernmentType',        label: 'Government Type',          value: 'State',                          isAi: true },
+    { name: 'State',                 label: 'State',                    value: 'Minnesota',                      isAi: true },
+  ],
+  [
+    { name: 'TaxCategory',           label: 'Tax Category',             value: 'PFL',                            isAi: true },
+    { name: 'TaxPayer',              label: 'Tax Payer',                value: 'Employee (EE)',                  isAi: true },
+    { name: 'EffectiveDate',         label: 'Effective Date',           value: '01/01/2026',                     isAi: true },
+  ],
+  [
+    { name: 'TaxRate',               label: 'Tax Rate',                 value: '',                               isAi: false },
+    { name: 'WageBase',              label: 'Wage Base',                value: '',                               isAi: false },
+    { name: 'FilingFrequency',       label: 'Filing Frequency',         value: 'Quarterly',                      isAi: true },
+  ],
+  [
+    { name: 'W2_Box14_Code',         label: 'W2 Box 14 Code',           value: '14 – MN PFML',                   isAi: true },
+    { name: 'PayMethod',             label: 'Pay Method',               value: 'EFT Credit',                     isAi: true },
+    { name: 'AutoInsert',            label: 'Auto Insert',              value: 'No',                             isAi: true },
+  ],
+  [
+    { name: 'TaxCode_External',      label: 'TaxCode External',         value: '',                               isAi: false },
+    { name: 'TaxCode_PayrollEngine', label: 'TaxCode Payroll Engine',   value: '',                               isAi: false },
+    { name: 'EIN_Mask',              label: 'EIN Mask',                 value: '',                               isAi: false },
+  ],
+];
+
+const TAX_FORM_SECTIONS = [
+  { title: 'Tax Identity',  rowIdx: [0, 1] },
+  { title: 'Rate & Filing', rowIdx: [2, 3] },
+  { title: 'Codes',         rowIdx: [4]    },
+];
+
+const LIVE_FILL_STEPS = [
+  { status: 'Identifying jurisdiction…', note: "Found keyword 'Minnesota' in bulletin header." },
+  { status: 'Classifying tax type…',     note: 'Document describes Paid Family Leave mandates.' },
+  { status: 'Extracting payer logic…',   note: 'Bulletin indicates Employee-side contribution.' },
+  { status: 'Mapping box codes…',        note: 'Standard W2 reporting for MN PFML identified.' },
+  { status: 'Configuration ready',       note: 'Analysis complete. Data verified.' },
+];
+
+function LoadFormLiveFill() {
+  const [liveFillStep, setLiveFillStep] = React.useState(0);
+  const [waveStep, setWaveStep] = React.useState(0);
+
+  const liveFillDone = liveFillStep >= LIVE_FILL_STEPS.length;
+  const liveFillActive = !liveFillDone;
+
+  React.useEffect(() => {
+    if (liveFillDone) return;
+    const id = setTimeout(() => setLiveFillStep(n => n + 1), 900);
+    return () => clearTimeout(id);
+  }, [liveFillStep, liveFillDone]);
+
+  React.useEffect(() => {
+    if (!liveFillDone) { setWaveStep(0); return; }
+    if (waveStep >= TAX_FIELD_ROWS.length) return;
+    const id = setTimeout(() => setWaveStep(n => n + 1), 110);
+    return () => clearTimeout(id);
+  }, [liveFillDone, waveStep]);
+
+  const liveFillCurrent =
+    LIVE_FILL_STEPS[Math.min(liveFillStep, LIVE_FILL_STEPS.length - 1)];
+
+  return (
+    <div style={{ maxWidth: 720 }}>
+      <style>{`
+        @keyframes pcc-ai-shimmer {
+          0%   { background-position: -1000px 0; }
+          100% { background-position:  1000px 0; }
+        }
+        @keyframes pcc-ai-attach-glow {
+          0%, 100% { box-shadow: 0 0 0 0 rgba(124, 58, 237, 0.25); }
+          50%      { box-shadow: 0 0 0 4px rgba(124, 58, 237, 0.08); }
+        }
+        .pcc-skel {
+          height: 36px; width: 100%; border-radius: 6px;
+          border: 1px solid var(--gray-2);
+          background-image: linear-gradient(90deg, var(--gray-1) 25%, var(--gray-2) 50%, var(--gray-1) 75%);
+          background-size: 1000px 100%;
+          animation: pcc-ai-shimmer 2s infinite linear;
+        }
+        .pcc-input {
+          width: 100%; height: 36px; padding: 0 10px;
+          font: inherit; font-size: 13px; color: var(--gray-9);
+          border: 1px solid var(--gray-2); border-radius: 6px;
+          background: #fff; box-sizing: border-box;
+        }
+        .pcc-input.pcc-ai-highlight {
+          background-color: #eef0fe;
+          transition: background-color .4s ease;
+        }
+      `}</style>
+
+      <div style={{
+        borderRadius: 10, padding: 12,
+        background: 'linear-gradient(93deg, #E9F3FC 0%, #F5EEF8 100%)',
+        animation: liveFillActive
+          ? 'pcc-ai-attach-glow 2s infinite ease-in-out'
+          : 'none',
+        transition: 'background .4s ease',
+        display: 'flex', flexDirection: 'column', gap: 12,
+      }}>
+        {/* Header */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
+          <div style={{ display: 'flex', alignItems: 'flex-start', gap: 8 }}>
+            <div style={{
+              flexShrink: 0, width: 18, height: 20,
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+              color: 'var(--info-dark)',
+            }}>
+              {liveFillActive ? <Ico.sparkles /> : <Ico.check />}
+            </div>
+            <div style={{
+              flex: 1, minWidth: 0, fontSize: 13, fontWeight: 700,
+              color: liveFillActive ? 'var(--gray-9)' : 'var(--info-dark)',
+            }}>
+              {liveFillActive
+                ? liveFillCurrent.status
+                : 'Agent done, but a few fields still need your input.'}
+            </div>
+          </div>
+          {!liveFillActive && (
+            <div style={{ paddingLeft: 26, fontSize: 12, color: 'var(--gray-9)' }}>
+              Highlighted fields couldn't be confidently extracted from your sources. Fill them in to finish configuring this tax.
+            </div>
+          )}
+        </div>
+
+        {/* Sections */}
+        <div style={{ background: '#fff', borderRadius: 8, padding: 16 }}>
+          {TAX_FORM_SECTIONS.map((section, si) => (
+            <div key={section.title} style={{ marginTop: si === 0 ? 0 : 24 }}>
+              <div style={{
+                fontSize: 12, fontWeight: 700, color: 'var(--gray-9)',
+                textTransform: 'uppercase', letterSpacing: '.04em',
+                paddingBottom: 8, borderBottom: '1px solid var(--gray-2)',
+                marginBottom: 10,
+              }}>
+                {section.title}
+              </div>
+              {section.rowIdx.map((ri, j) => (
+                <div key={ri} style={{
+                  display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)',
+                  gap: 12, marginTop: j === 0 ? 0 : 10,
+                }}>
+                  {TAX_FIELD_ROWS[ri].map(field => {
+                    // Mirrors moscow's ConfigField gating:
+                    //   isAi  → ready when row revealed in wave
+                    //   !isAi → ready immediately when live-fill ends, highlighted
+                    const revealed = ri < waveStep;
+                    const fieldReady = field.isAi ? revealed : !liveFillActive;
+                    const isHighlighted = !field.isAi && !liveFillActive;
+                    return (
+                      <div key={field.name} style={{
+                        display: 'flex', flexDirection: 'column', gap: 4,
+                        minWidth: 0,
+                      }}>
+                        <div style={{ fontSize: 11, color: 'var(--gray-6)' }}>
+                          {field.label}
+                        </div>
+                        {!fieldReady ? (
+                          <div className="pcc-skel" />
+                        ) : (
+                          <input
+                            className={`pcc-input${isHighlighted ? ' pcc-ai-highlight' : ''}`}
+                            defaultValue={field.value}
+                            placeholder={isHighlighted ? 'Required' : undefined}
+                          />
+                        )}
+                      </div>
+                    );
+                  })}
+                </div>
+              ))}
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export {
   SourcesRow, SourcesInline,
   LoadTyping, LoadShimmer, LoadStatus, LoadSkeletonCards, LoadProgress,
   FilterScope, FilterRefine,
   ContextComposer, ContextComposerReadOnly, ContextOnMessage, ContextPill, ContextPicker,
   FileUploadComposer, FileUploadSubmitted, FileUploadDropzone,
+  LoadFormLiveFill,
 };

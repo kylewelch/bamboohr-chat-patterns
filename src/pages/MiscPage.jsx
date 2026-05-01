@@ -15,6 +15,7 @@ import {
   FileUploadComposer,
   FileUploadSubmitted,
   FileUploadDropzone,
+  LoadFormLiveFill,
 } from '../patterns/misc.jsx';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import PatternShowcase from '../components/PatternShowcase.jsx';
@@ -93,6 +94,18 @@ export default function MiscPage() {
         }}
       >
         <LoadSkeletonCards />
+      </PatternShowcase>
+
+      <PatternShowcase
+        title="LoadFormLiveFill"
+        description="An agent live-fills a structured form: shimmer skeletons resolve into AI-extracted values in a top-to-bottom wave, while any fields the agent leaves blank stay highlighted, prompting the user to complete them."
+        bare
+        previewContext={{
+          userMsg: "Configure a new Minnesota Paid Family Leave tax from these sources.",
+          aiLead: "On it — pre-filling what I can extract now:",
+        }}
+      >
+        <LoadFormLiveFill />
       </PatternShowcase>
 
       <PatternShowcase
@@ -196,6 +209,7 @@ export default function MiscPage() {
       >
         <FileUploadDropzone />
       </PatternShowcase>
+
     </>
   );
 }
